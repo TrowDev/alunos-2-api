@@ -16,39 +16,39 @@ import java.util.Optional;
 @Service
 public class AlunoServiceImpl implements AlunoService {
 
-    @Autowired
-    private AlunoRepository alunoRepository;
+	@Autowired
+	private AlunoRepository alunoRepository;
 
-    @Override
-    public Aluno salvar(Aluno aluno) {
-        BigDecimal desconto = calculaDesconto(new BigDecimal(399));
-        log.info("O desconto foi: {}", desconto);
-        aluno.setDesconto(desconto);
-        return alunoRepository.save(aluno);
-    }
+	@Override
+	public Aluno salvar(Aluno aluno) {
+		BigDecimal desconto = calculaDesconto(new BigDecimal(399));
+		log.info("O desconto foi: {}", desconto);
+		aluno.setDesconto(desconto);
+		return alunoRepository.save(aluno);
+	}
 
-    @Override
-    public Aluno editar(Long id, Aluno aluno) {
-        aluno.setId(id);
-        return alunoRepository.save(aluno);
-    }
+	@Override
+	public Aluno editar(Long id, Aluno aluno) {
+		aluno.setId(id);
+		return alunoRepository.save(aluno);
+	}
 
-    @Override
-    public List<Aluno> list() {
-        return alunoRepository.findAll();
-    }
+	@Override
+	public List<Aluno> list() {
+		return alunoRepository.findAll();
+	}
 
-    @Override
-    public Optional<Aluno> findById(Long id) {
-        return alunoRepository.findById(id);
-    }
+	@Override
+	public Optional<Aluno> findById(Long id) {
+		return alunoRepository.findById(id);
+	}
 
-    @Override
-    public void delete(Long id) {
-        alunoRepository.deleteById(id);
-    }
+	@Override
+	public void delete(Long id) {
+		alunoRepository.deleteById(id);
+	}
 
-    public BigDecimal calculaDesconto(BigDecimal valor) {
-        return Desconto.getTipoDesconto(Desconto.FIES.name()).calculaDesconto(valor);
-    }
+	public BigDecimal calculaDesconto(BigDecimal valor) {
+		return Desconto.getTipoDesconto(Desconto.FIES.name()).calculaDesconto(valor);
+	}
 }
